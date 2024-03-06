@@ -2,14 +2,54 @@
     include_once 'header.php';
     include_once 'navbar.php';
 
+    require_once 'classes/Database.php';
+    require_once 'classes/User.php';
+
     session_start();
 
     if(!$_SESSION['userLogged']){
         header('Location: login.php');
     }
-?>
 
-<h1>Home</h1>
+    use DB_PDO\Database as DB;
+    use UserDTO\User as U;
+
+    $config = require_once 'config.php';
+    $PDOConn = DB::getInstance($config);
+    $conn = $PDOConn->getConnection();
+
+    $userDTO = new U($conn);
+
+?>
+<div class="container-fluid p-5">
+    <h1>Home</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name </th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $res = $userDTO->getAllUsers();
+                if($res){
+                    foreach($res as $row) {?>
+                <tr>
+                    <th scope="row"><?=$row['id'] ?></th>
+                    <td><?=$row['firstname'] ?></td>
+                    <td><?=$row['lastname'] ?></td>
+                    <td><?=$row['email'] ?></td>
+                </tr>
+                <?php }
+                }; ?>
+        </tbody>
+    </table>
+
+</div>
 
 
 

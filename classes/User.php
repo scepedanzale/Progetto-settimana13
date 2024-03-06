@@ -11,12 +11,11 @@ namespace UserDTO{
         // richiama tutti utenti
         public function getAllUsers() {
             $sql = 'SELECT * FROM prog_13.users';
-            $res = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $res = $this->conn->query($sql, \PDO::FETCH_ASSOC);
     
             if($res){
                 return $res;
             }
-
             return null;
         }
 
@@ -28,7 +27,6 @@ namespace UserDTO{
             if($res){
                 return $stm->fetchAll();
             }
-
             return null;
         }
         public function getUserByID(int $id) {
@@ -39,7 +37,6 @@ namespace UserDTO{
             if($res){ 
                 return $res;
             }
-
             return null;
         }
 

@@ -9,12 +9,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">login</a>
-        </li>
+        <?php
+          session_start();
+          if(!$_SESSION['userLogged']){ ?>
+            <li class="nav-item">
+              <a class="nav-link" href="register.php">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">Login</a>
+            </li>
+          <?php }else{ ?>
+            <li class="nav-item">
+              <a class="nav-link" href="controller.php?action=logout">Logout</a>
+            </li>
+          <?php } ?>
+        
       </ul>
     </div>
   </div>

@@ -2,6 +2,17 @@
 
 include_once 'header.php';
 include_once 'navbar.php';
+
+include_once 'header.php';
+include_once 'navbar.php';
+
+session_start();
+
+if($_SESSION['userLogged']){
+    header('Location: index.php');
+}
+
+
 ?>
 
 

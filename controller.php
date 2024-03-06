@@ -29,3 +29,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'login'){
     }
 }
 
+if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'logout'){
+    session_unset();
+    header('Location: index.php');
+}
