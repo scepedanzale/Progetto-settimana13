@@ -11,26 +11,27 @@
         header('Location: login.php');
     }
 
+    use DB_PDO\Connection as Conn;
     use DB_PDO\Database as DB;
-    use UserDTO\User as U;
 
     $config = require_once 'config.php';
-    $PDOConn = DB::getInstance($config);
+    $PDOConn = Conn::getInstance($config);
     $conn = $PDOConn->getConnection();
 
-    $userDTO = new U($conn);
+    $userDTO = new DB($conn);
 
 ?>
 <div class="container-fluid p-5">
-    <h1>Home</h1>
+    <h1 class="mb-3">Lista degli Utenti</h1>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name </th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Email</th>
+                <th>#</th>
+                <th>Name </th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -39,13 +40,16 @@
                 if($res){
                     foreach($res as $row) {?>
                 <tr>
-                    <th scope="row"><?=$row['id'] ?></th>
+                    <th><?=$row['id'] ?></th>
                     <td><?=$row['firstname'] ?></td>
                     <td><?=$row['lastname'] ?></td>
                     <td><?=$row['email'] ?></td>
+                    <td>
+                        <a type="button" href="update.php?action=updateUser&id=<?=$row['id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
+                        <a type="button" href="controller.php?action=deleteUser&id=<?=$row['id'] ?>" class="btn"><i class="bi bi-trash"></i></a>
+                    </td>
                 </tr>
-                <?php }
-                }; ?>
+                <?php }}; ?>
         </tbody>
     </table>
 
@@ -80,12 +84,12 @@ Autenticazione Utente:
     - Il sistema dovrà autenticare gli utenti rispetto alle credenziali memorizzate in un database. 
 Gestione dei Dati: 
     - Una volta autenticati, gli utenti potranno eseguire operazioni CRUD (Create, Read, Update, Delete) 
-    sui dati sensibili presenti nel database. 
+        sui dati sensibili presenti nel database. 
     - Le operazioni CRUD dovranno essere gestite tramite appositi form o interfaccia utente. 
 Accesso Riservato: 
     - L'accesso al pannello di amministrazione e alle operazioni CRUD dovrà essere riservato agli utenti autorizzati. 
     - Gli utenti non autorizzati che tentano di accedere al pannello di amministrazione 
-    dovranno essere reindirizzati ad una pagina di login.
+        dovranno essere reindirizzati ad una pagina di login.
 
 
 Struttura dell'Applicazione 

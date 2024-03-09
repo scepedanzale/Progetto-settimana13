@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(72, 29, 29);
+    color: white;
+}
+
+.bi-pencil, .bi-trash{
+    color: rgb(72, 29, 29);
+    font-size: 1.3em;
+    padding: 5px;
+    border-radius: 0.5em;
+}
+.bi-pencil:hover, .bi-trash:hover{
+    color: white;
+    background-color: rgb(72, 29, 29);
+}
